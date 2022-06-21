@@ -105,7 +105,7 @@ def decode(filename):
 
 
 
-    path='/home/hari/final_flask_project'
+    path='/home/hari/final_flask_project/static/img/uploads'
     image=os.path.join(path,filename)
     imj= Image.open(image, 'r')
 
@@ -145,6 +145,7 @@ def decode(filename):
 def hello_world():
     image=''
     img=''
+    new_img_name=''
     if request.method=='POST':
         if request.files:
             print('Filess are present')
@@ -169,8 +170,10 @@ def hello_world():
                 # raise ValueError('Data is Empty')
             newimg=imag.copy()
             encode_enc(newimg,plain)
+            new_image_path=os.path.join(app.config['IMAGE_UPLOADS'],)
             new_img_name="stego_img" + image.filename
-            newimg.save(new_img_name, str(new_img_name.split(".")[1].upper()))
+            new_image_path=os.path.join(app.config['IMAGE_UPLOADS'],new_img_name)
+            newimg.save(new_image_path, str(new_img_name.split(".")[1].upper()))
 
 
 
