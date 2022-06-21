@@ -101,6 +101,35 @@ def modPix(pix, data):
         yield pix[3:6]
         yield pix[6:9]
 
+def decode(filename):
+
+
+
+    path='/home/hari/final_flask_project'
+    image=os.path.join(path,filename)
+    imj= Image.open(image, 'r')
+
+ 
+    data = ''
+    imgdata = iter(imj.getdata())
+ 
+    while (True):
+        pixels = [value for value in imgdata.__next__()[:3] +
+                                imgdata.__next__()[:3] +
+                                imgdata.__next__()[:3]]
+ 
+        # string of binary data
+        binstr = ''
+ 
+        for i in pixels[:8]:
+            if (i % 2 == 0):
+                binstr += '0'
+            else:
+                binstr += '1'
+ 
+        data += chr(int(binstr, 2))
+        if (pixels[-1] % 2 != 0):
+            return data
 
 
 
@@ -134,7 +163,10 @@ def hello_world():
             imag=Image.open(img,'r')
             print(imag)
             if(len(plain)==0):
-                raise ValueError('Data is Empty')
+                ans=decode(image.filename)
+                print('Decoded data ' + str(ans))
+                return redirect(request.url)
+                # raise ValueError('Data is Empty')
             newimg=imag.copy()
             encode_enc(newimg,plain)
             new_img_name="stego_img" + image.filename
@@ -144,7 +176,7 @@ def hello_world():
 
 
         # img=
-    return render_template('index.html',user_image = img)
+    return render_template('index.html')
 
 if __name__=="__main__":
     app.run(debug=True, port=8000)
