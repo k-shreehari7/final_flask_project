@@ -58,7 +58,7 @@
   <div class="container my-3" id="output_section">
 
   <h1>The Output</h1>
-  <p>Decoded Data from the image is <strong id=""output_from_flask>{{ output }}</strong></p>
+  <p id="lk">Decoded Data from the image is <strong id=""output_from_flask>{{ output }}</strong></p>
 </div>
 </div>
   <button type="submit" class="btn btn-primary my-3" onclick="alertFunction()">Encrypt/Decrypt</button>
@@ -76,6 +76,8 @@
       setTimeout(function(){
         var msg=document.getElementById('fading_out_container')
         msg.parentNode.removeChild(msg)
+
+        var t=document.getElementById('lk').innerHTML=''
 
       //   var disp=document.getElementById('output_section')
       //   let text=document.getElementById('output_from_flask')
