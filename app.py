@@ -146,6 +146,7 @@ def hello_world():
     image=''
     img=''
     new_img_name=''
+    ans=''
     if request.method=='POST':
         if request.files:
             print('Filess are present')
@@ -166,7 +167,8 @@ def hello_world():
             if(len(plain)==0):
                 ans=decode(image.filename)
                 print('Decoded data ' + str(ans))
-                return redirect(request.url)
+                return render_template('index.html',output=ans)
+                
                 # raise ValueError('Data is Empty')
             newimg=imag.copy()
             encode_enc(newimg,plain)
@@ -179,7 +181,7 @@ def hello_world():
 
 
         # img=
-    return render_template('index.html')
+    return render_template('index.html',output=ans)
 
 if __name__=="__main__":
     app.run(debug=True, port=8000)
